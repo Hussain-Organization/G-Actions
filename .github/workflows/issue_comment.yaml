@@ -8,10 +8,14 @@ jobs:
   comment-with-action:
     runs-on: windows-latest
     steps:
+      - name: "auth" 
+        uses: actions/labeler@v2
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
       - name: "dump github context"
         run: echo '${{toJSON(github.event)}}'
         shell: powershell
-      - name: Create comment
+      - name: "Create comment"
         uses: peter-evans/create-or-update-comment@v3
         with:
           issue-number: ${{github.event.issue.number}}
